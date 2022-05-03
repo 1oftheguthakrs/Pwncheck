@@ -1,7 +1,6 @@
-# hibpwn_check
-Check multiple email on HIBP
-
-Save email in email.txt in the same folder as hibpwn_check.py
-Download and change APIKEY to your API key
-
-./hibpwn_check.py
+# Help Menu
+positional arguments:
+  hibp        HIBP API key
+  email       input file containing e-mail line by line
+# Example
+./hibpwn_check.py API_key email.txt
