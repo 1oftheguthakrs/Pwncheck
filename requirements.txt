@@ -1,0 +1,8 @@
+bs4
+unidecode
+requests
+argparse
+xlwt
+xlrd
+hibp
+time
