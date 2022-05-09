@@ -69,7 +69,7 @@ def main(args):
   breaches_size = len(breaches_name)
   passwords_size = len(passwords_name)
   
-  file1 = open(args.email,'r')
+  file1 = open(args.file,'r')
   lines = file1.readlines()
   for line in lines:
    line=line.rstrip('\n')
@@ -163,8 +163,8 @@ if __name__ == '__main__':
 
     args = argparse.ArgumentParser(description="", formatter_class=argparse.RawTextHelpFormatter, usage=argparse.SUPPRESS)
 
-    args.add_argument('hibp', type=str, default="", help="HIBP API key")
-    args.add_argument('email', type=str, default="", help="input file containing e-mail line by line")
+    args.add_argument('-p', '--hibp', type=str, default="", help="HIBP API key")
+    args.add_argument('-f', '--file', type=str, default="", help="Input file containing e-mail line by line")
 
     args = args.parse_args()
 #    safe = args.safe
