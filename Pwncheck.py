@@ -77,17 +77,27 @@ def main(args):
    email=line
    ws.write(q, col_email, email)
    
+   # initial request
    breaches_pass = []
+   hibp_url = "https://haveibeenpwned.com/api/v3/breaches"
+   response = requests.get(hibp_url, headers={'hibp-api-key':args.hibp})
+   response_json = json.loads(response.content)
+
+   # Add every breach that contains password exposition to a list.
+   for breach in response_json:
+     if "Passwords" in breach["DataClasses"]:
+       breaches_pass.append(breach["Name"])
+
+   # request with email
    hibp_url = "https://haveibeenpwned.com/api/v3/breachedaccount/"
    hibp_email = line 
    hibp_request = hibp_url + hibp_email
-   
    # The API doesn't like getting spammed.
    time.sleep(1.5)
    
-   response = requests.get(hibp_request, headers={'hibp-api-key':'arg.hibp'})
+   response = requests.get(hibp_request, headers={'hibp-api-key':args.hibp})
    response_code = response.status_code
-   
+
    # Prints the result to each email.
    if response_code == 200:
        print(bcolors.FAIL + "Found in Breach - " + hibp_email)
@@ -98,7 +108,7 @@ def main(args):
        # Writes pwned col to yes.
        ws.write(q, col_pwned, "Y")
        response_json = json.loads(response.content)
-   
+
        breaches_string = ""
        passwords_string = ""
    
